@@ -13,14 +13,14 @@
  *  		- UpArrows -- Start Values
  *  			- Height proportional to size
  *  			- Edgedots = Size - 1
- *  			- MiDots = Size + 1
+ *  			- MiDots = (Size - 1) * 2
  *  			- /\ combination ++ per level
  *  		- DownArrows -- Start Values
  *  			- Height Proportional to size
  *  			- Edgedots  = 0 (++)
  *  			- MiDots = 0 (+=2)
  *  			- /\ combination = SIZE (--)
- * */
+ */
 public class ExtraCredit {
 	/************************************************************************/
 	/*CLASS CONSTANT TO ADJUST ROCKET SIZE:                                 */
@@ -31,9 +31,15 @@ public class ExtraCredit {
 	public static void main(String[] args) {
 		triangle();
 		spacer();
+		upArrows();
+		downArrows();
+		spacer();
+		downArrows();
+		upArrows();
+		spacer();
 		triangle();
 	}
-	public static void triangle () {
+	public static void triangle () { //triangle/capsule/nossle portion
 		int height = SIZE * 2 - 1;
 		int space = height;
 		int slash = 1;
@@ -60,22 +66,61 @@ public class ExtraCredit {
 		}
 		System.out.println("+");
 	}
-	public static void upArrows () {
-		int edgeDot = SIZE - 1;
-		int miDot = SIZE + 1;
-		int slCombo = 1;
+	public static void upArrows () { //right-side-up triangle portion for centerpiece
+		int edgeDot = SIZE - 1; //value for first set of dots
+		int miDot = (SIZE - 1) * 2; //value of dots in the middle
+		int slCombo = 1; //value of slashes that appear in the set
+		String slash = "/\\"; //slash type -- easily changeable when copying to downArrows
 		for (int i = 1; i <= SIZE; i++) { //height of section proportional to size value
-			System.out.print("|");
-			for (int j = 1; j <= edgeDot; j++) {
+			System.out.print("|"); //prints first edge line
+			for (int j = 1; j <= edgeDot; j++) { //prints first set of dots
 				System.out.print(".");
 			}
-			for (int j = 1; j <= slCombo; j++) {
-				System.out.print("/\\");
+			for (int j = 1; j <= slCombo; j++) { //prints first set of slashes
+				System.out.print(slash);
 			}
+			for (int j = 1; j <= miDot; j++) { //middle dots
+				System.out.print(".");
+			}
+			for (int j = 1; j <= slCombo; j++) { //second set of slashes
+				System.out.print(slash);
+			}
+			for (int j = 1; j <= edgeDot; j++) { //last set of dots
+				System.out.print(".");
+			}
+			System.out.println("|"); //prints first edge line
+			edgeDot--; //each level edge dots decrease one
+			miDot -=2; //each level middle dots decrease 2
+			slCombo ++; //each level slashes increase one
 		}
 	}
-	public static void downArrows () {
-		
+	public static void downArrows () { //upside-down triangle portion for centerpiece
+		int edgeDot = 0; //value for first set of dots
+		int miDot = 0; //value of dots in the middle
+		int slCombo = SIZE; //value of slashes that appear in the set
+		String slash = "\\/"; //slash type -- easily changeable when copying to downArrows -- DONE
+		for (int i = 1; i <= SIZE; i++) { //height of section proportional to size value
+			System.out.print("|"); //prints first edge line
+			for (int j = 1; j <= edgeDot; j++) { //prints first set of dots
+				System.out.print(".");
+			}
+			for (int j = 1; j <= slCombo; j++) { //prints first set of slashes
+				System.out.print(slash);
+			}
+			for (int j = 1; j <= miDot; j++) { //middle dots
+				System.out.print(".");
+			}
+			for (int j = 1; j <= slCombo; j++) { //second set of slashes
+				System.out.print(slash);
+			}
+			for (int j = 1; j <= edgeDot; j++) { //last set of dots
+				System.out.print(".");
+			}
+			System.out.println("|"); //prints first edge line
+			edgeDot++; //each level edge dots increase one
+			miDot +=2; //each level middle dots increase 2
+			slCombo --; //each level slashes decrease one
+		}
 	}
 
 }
